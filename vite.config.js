@@ -21,7 +21,7 @@ function mapAssetReloadPlugin() {
 
 export default defineConfig({
   // Use root base in dev so the app loads at http://localhost:5173/
-  base: process.env.NODE_ENV === "production" ? "/ceyline_island_portfolio_game/" : "/",
+  base: process.env.NODE_ENV === "production" ? "/ceyline_island_playable_videogame_portfolio/" : "/",
   plugins: [mapAssetReloadPlugin()],
   build: {
     minify: "terser",

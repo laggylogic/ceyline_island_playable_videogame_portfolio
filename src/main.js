@@ -2,7 +2,10 @@ import { dialogueData, scaleFactor } from "./constants";
 import { k } from "./kaboomCtx";
 import { displayDialogue, setCamScale } from "./utils";
 
-k.loadSprite("spritesheet", "./spritesheet.png", {
+// Use Vite base URL so assets load correctly on GitHub Pages
+const BASE = import.meta.env.BASE_URL;
+
+k.loadSprite("spritesheet", BASE + "spritesheet.png", {
   sliceX: 39,
   sliceY: 31,
   anims: {
@@ -23,13 +26,13 @@ k.loadSprite("spritesheet", "./spritesheet.png", {
   },
 });
 
-k.loadSprite("island_map", "./ceyline_island.png");
-k.loadSprite("room_map", "./map.png");
-k.loadSprite("ceyline_house_map", "./ceyline_house.png");
-k.loadSound("bgm", "./background_music.mp3");
-k.loadSound("grass_walk", "./grass_walking.m4a");
-k.loadSound("door_open", "./door_open.m4a");
-k.loadSound("floor_walk", "./floor_walk.m4a");
+k.loadSprite("island_map", BASE + "ceyline_island.png");
+k.loadSprite("room_map", BASE + "map.png");
+k.loadSprite("ceyline_house_map", BASE + "ceyline_house.png");
+k.loadSound("bgm", BASE + "background_music.mp3");
+k.loadSound("grass_walk", BASE + "grass_walking.m4a");
+k.loadSound("door_open", BASE + "door_open.m4a");
+k.loadSound("floor_walk", BASE + "floor_walk.m4a");
 
 k.setBackground(k.Color.fromHex("#311047"));
 
@@ -352,7 +355,7 @@ k.scene("island", async (opts = {}) => {
   if (tapEl) tapEl.style.display = "none";
 
   const useExitSpawn = opts.useExitSpawn === true;
-  const mapData = await (await fetch("./ceyline_island.json")).json();
+  const mapData = await (await fetch(BASE + "ceyline_island.json")).json();
   const { player } = setupScene(
     mapData,
     "island_map",
@@ -445,7 +448,7 @@ k.scene("island", async (opts = {}) => {
 });
 
 k.scene("room", async () => {
-  const mapData = await (await fetch("./map.json")).json();
+  const mapData = await (await fetch(BASE + "map.json")).json();
   const { player } = setupScene(
     mapData,
     "room_map",
@@ -491,7 +494,7 @@ k.scene("ceyline_house", async () => {
   const tapEl = document.getElementById("tap-to-start");
   if (tapEl) tapEl.style.display = "none";
 
-  const mapData = await (await fetch("./ceyline_house.json")).json();
+  const mapData = await (await fetch(BASE + "ceyline_house.json")).json();
   const { player } = setupScene(
     mapData,
     "ceyline_house_map",
