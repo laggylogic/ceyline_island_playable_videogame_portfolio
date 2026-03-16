@@ -18,16 +18,12 @@ k.loadSprite("spritesheet", BASE + "spritesheet.png", {
     "idle-left": 1081,
     "walk-left": { from: 1081, to: 1082, loop: true, speed: 8 },
     // 2-frame “bob” so NPC looks like it’s moving (adjust from/to to match your sheet)
-    "npc-slime": { from: 858, to: 859, loop: true, speed: 4 },
-    "npc-kiki": { from: 780, to: 781, loop: true, speed: 4 },
-    "npc-moca": { from: 788, to: 789, loop: true, speed: 4 },
     "npc-bunny": { from: 780, to: 781, loop: true, speed: 4 },
     "npc-ghost": { from: 864, to: 865, loop: true, speed: 4 },
   },
 });
 
 k.loadSprite("island_map", BASE + "ceyline_island.png");
-k.loadSprite("room_map", BASE + "map.png");
 k.loadSprite("ceyline_house_map", BASE + "ceyline_house.png");
 k.loadSound("bgm", BASE + "background_music.mp3");
 k.loadSound("grass_walk", BASE + "grass_walking.m4a");
@@ -151,7 +147,7 @@ function setupScene(mapData, mapSpriteName, scaleFactor, onEnterhouse = null, on
         const triggerY = obj.y;
         const triggerW = w;
         const triggerH = h;
-        const noEngageFromTop = triggerName === "Janet" || triggerName === "wenzheng" || triggerName === "mom" || triggerName === "dad" || triggerName === "shelves" || triggerName === "kiki" || triggerName === "moca" || triggerName === "game_console";
+        const noEngageFromTop = triggerName === "sister";
         player.onCollide(triggerName, () => {
           if (player.isInDialogue) return;
           if (dialogueCooldownSeconds > 0) {
@@ -162,10 +158,7 @@ function setupScene(mapData, mapSpriteName, scaleFactor, onEnterhouse = null, on
             const triggerCenterYWorld = (map.pos.y + (triggerY + triggerH * 0.5)) * scaleFactor;
             const triggerCenterXWorld = (map.pos.x + (triggerX + triggerW * 0.5)) * scaleFactor;
             const fromFront = player.pos.y >= triggerCenterYWorld;
-            if (triggerName === "Janet" || triggerName === "dad") {
-              const fromRight = player.pos.x >= triggerCenterXWorld;
-              if (!fromFront && !fromRight) return;
-            } else if (triggerName === "mom") {
+            if (triggerName === "sister") {
               const fromLeft = player.pos.x <= triggerCenterXWorld;
               if (!fromFront && !fromLeft) return;
             } else {
@@ -371,7 +364,6 @@ k.scene("island", async (opts = {}) => {
 
   // NPCs: same spritesheet, 2-frame anim so they look like they’re moving
   const npcAnims = {
-    into_slime: "npc-slime",
     welcome_bunny: "npc-bunny",
   };
   const triggersLayer = mapData.layers?.find((l) => l.name === "dialogue_triggers");
@@ -447,6 +439,7 @@ k.scene("island", async (opts = {}) => {
   }
 });
 
+<<<<<<< HEAD
 k.scene("room", async () => {
   const mapData = await (await fetch(BASE + "map.json")).json();
   const { player } = setupScene(
@@ -489,6 +482,8 @@ k.scene("room", async () => {
   });
 });
 
+=======
+>>>>>>> ff390ff (yayyyy my project is finally doneee)
 k.scene("ceyline_house", async () => {
   const loadingEl = document.getElementById("loading-screen");
   const tapEl = document.getElementById("tap-to-start");
