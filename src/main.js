@@ -439,51 +439,6 @@ k.scene("island", async (opts = {}) => {
   }
 });
 
-<<<<<<< HEAD
-k.scene("room", async () => {
-  const mapData = await (await fetch(BASE + "map.json")).json();
-  const { player } = setupScene(
-    mapData,
-    "room_map",
-    scaleFactor,
-    null,
-    () => {
-      k.play("door_open", { volume: 1 });
-      k.go("island", { useExitSpawn: true });
-    },
-    null,
-    false,
-    0.4
-  );
-
-  // Kiki and Moca sprites (2-frame bob) at their trigger positions
-  const roomNpcAnims = { kiki: "npc-kiki", moca: "npc-moca" };
-  const roomTriggers = mapData.layers?.find((l) => l.name === "dialogue_triggers");
-  if (roomTriggers) {
-    for (const obj of roomTriggers.objects) {
-      const anim = roomNpcAnims[obj.name];
-      if (!anim) continue;
-      const x = (obj.x + (obj.width || 0) / 2) * scaleFactor;
-      const y = (obj.y + (obj.height || 0) / 2) * scaleFactor;
-      k.add([
-        k.sprite("spritesheet", { anim }),
-        k.pos(x, y),
-        k.anchor("center"),
-        k.scale(scaleFactor),
-        k.z(0),
-      ]);
-    }
-  }
-
-  setCamScale(k);
-  k.onResize(() => setCamScale(k));
-  addMovementAndCamera(player, {
-    onStep: () => k.play("floor_walk", { volume: 0.7 }),
-  });
-});
-
-=======
->>>>>>> ff390ff (yayyyy my project is finally doneee)
 k.scene("ceyline_house", async () => {
   const loadingEl = document.getElementById("loading-screen");
   const tapEl = document.getElementById("tap-to-start");
